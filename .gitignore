@@ -1,0 +1,27 @@
+# Symfony standard ignored paths
+/var/
+/vendor/
+/node_modules/
+/.env.local
+/.env.*.local
+/public/bundles/
+/config/secrets/*/*.decrypt.private.php
+/phpunit.xml
+.phpunit.result.cache
+
+# IDE
+/.idea/
+/.vscode/
+
+# OS files
+.DS_Store
+
+# Logs
+npm-debug.log
+yarn-error.log
+
+# Uploads
+/public/uploads/images/
+
+# Custom
+/drivers/

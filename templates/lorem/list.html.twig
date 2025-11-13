@@ -1,0 +1,40 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Liste des Étudiants et Modules{% endblock %}
+
+{% block body %}
+<h2>Liste des Étudiants et Modules</h2>
+
+<table border="2">
+    <thead>
+        <tr>
+            <th>Étudiant</th>
+            <th>Nom du module</th>
+            <th>Enseignant</th>
+            <th>Nombre d'heures</th>
+            <th>Date</th>
+            <th>Affectation</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if etudiants is not empty and listeModules is not empty %}
+            {% for etudiant in etudiants %}
+                {% for module in listeModules %}
+                    <tr>
+                        <td>{{ etudiant|upper }}</td>
+                        <td>{{ module.nom }}</td>
+                        <td>{{ module.enseignant }}</td>
+                        <td>{{ module.nbrHeures }}</td>
+                        <td>{{ module.date }}</td>
+                        <td><a href="{{ path('app_affectation') }}">Affectation</a></td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="6"><strong>Aucune donnée disponible</strong></td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table>
+{% endblock %}
