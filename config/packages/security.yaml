@@ -22,30 +22,36 @@ security:
             lazy: true
             provider: app_user_provider
 
+            # 👇 **Fix for the error**
+            entry_point: form_login
+
             # ✅ Enable login form
             form_login:
-                login_path: login          # route name for login form
-                check_path: login          # route handling login submit
+                login_path: login
+                check_path: login
                 enable_csrf: true
-                default_target_path: /     # redirect after login
+                default_target_path: /
+
+            # Optional: remember-me feature
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800 # 7 days
+                path: /
+                always_remember_me: true
+
+            # 👇 Your authenticator created by make:auth
+            custom_authenticator: App\Security\UserAuthenticator
 
             # ✅ Enable logout
             logout:
                 path: logout
                 target: /
 
-            # Optional: remember-me feature
-            remember_me:
-                secret: '%kernel.secret%'
-                lifetime: 604800 # 7 days
-
     # 🎯 Restrict routes by roles
     access_control:
-        # Admin dashboard + CRUD
-        - { path: ^/admin, roles: ROLE_ADMIN }
-        # Booking and profile pages for normal users
-        - { path: ^/booking, roles: ROLE_USER }
-        - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/addvoiture, roles: ROLE_AGENT }
+        # - { path: ^/booking, roles: ROLE_USER }
+        # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
     security:
